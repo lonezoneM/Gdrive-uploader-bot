@@ -25,20 +25,20 @@ def download_file(url, dl_path):
 
 
 def utube_dl(link):
-  ytdl_opts = {
+  ytdlp_opts = {
     'outtmpl' : os.path.join(DOWNLOAD_DIRECTORY, '%(title)s'),
     'noplaylist' : True,
     'logger': LOGGER,
     'format': 'bestvideo+bestaudio/best',
     'geo_bypass_country': 'IN'
   }
-  with youtube_dl.YoutubeDL(ytdl_opts) as ytdl:
+  with ytdlp.YoutubeDL(ytdlp_opts) as ytdlp:
     try:
-      meta = ytdl.extract_info(link, download=True)
+      meta = ytdlp.extract_info(link, download=True)
     except DownloadError as e:
       return False, str(e)
     for path in glob.glob(os.path.join(DOWNLOAD_DIRECTORY, '*')):
       if path.endswith(('.avi', '.mov', '.flv', '.wmv', '.3gp','.mpeg', '.webm', '.mp4', '.mkv')) and \
           path.startswith(ytdl.prepare_filename(meta)):
         return True, path
-    return False, 'Something went wrong! No video file exists on server.'
+    return False, 'Oh no! Something went wrong! No video file exists on server.'
