@@ -4,7 +4,7 @@ import glob
 import ytdlp
 from pySmartDL import SmartDL
 from urllib.error import HTTPError
-from youtube_dl import DownloadError
+from ytdlp import DownloadError
 from bot import DOWNLOAD_DIRECTORY, LOGGER
 
 
